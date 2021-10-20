@@ -4,6 +4,8 @@ import { getCoinsMarket } from "../../services/api";
 import TableComponent from "../../components/table/table";
 import { Spinner } from "react-bootstrap";
 
+import "./home.css";
+
 const Home = () => {
   const [list, setList] = useState([]);
   const [error, setError] = useState();
@@ -48,7 +50,11 @@ const Home = () => {
       {list.length > 0 ? (
         <TableComponent headerData={buildTableHeaderData()} tableData={[]} />
       ) : (
-        <Spinner animation="border" variant="primary" />
+        <Spinner
+          animation="border"
+          variant="primary"
+          className="spinner-center"
+        />
       )}
     </div>
   );
