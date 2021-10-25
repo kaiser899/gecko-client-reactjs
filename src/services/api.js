@@ -6,14 +6,10 @@ const instance = axios.create({
 });
 
 const buildParams = (params) => {
-  if (!params) {
-    return "";
-  }
+  if (params === undefined) return "";
   const arr = [];
   Object.keys(params).forEach((k) => {
-    if (params[k]) {
-      arr.push(`${k}=${params[k]}`);
-    }
+    if (params[k] !== undefined) arr.push(`${k}=${params[k]}`);
   });
   return "?" + arr.join("&");
 };
@@ -28,7 +24,6 @@ export const getCoinsMarket = async (params) => {
     const parsedParams = buildParams(params);
     try {
       const res = await instance.get(`/coins/markets${parsedParams}`);
-      // console.log(res.data);
       return { data: res.data };
     } catch (error) {
       return { error };

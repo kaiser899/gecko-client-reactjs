@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { getCoinsMarket } from "../../services/api";
-
 import TableComponent from "../../components/table/table";
-import { Spinner } from "react-bootstrap";
-
+import Spinner from "react-bootstrap/Spinner";
 import "./home.css";
 
 const Home = () => {
   const [list, setList] = useState([]);
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
+  const [tablePageNo, setTablePageNo] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getCoinsMarketParams = {
       vs_currency: "eur",
       per_page: 10,
+      page: tablePageNo,
     };
 
     async function fetchList() {
+      setLoading(true);
       const res = await getCoinsMarket(getCoinsMarketParams);
-      if (res.data) {
+      if (res.data)
         setList(
           res.data.map((k) => {
             return {
@@ -31,29 +33,42 @@ const Home = () => {
             };
           })
         );
-      } else if (res.error) {
-        setError(res.error);
-      }
+      else if (res.error) setError(res.error);
+      setLoading(false);
     }
 
     fetchList();
-  }, []);
-
-  console.log(list);
+  }, [tablePageNo]);
 
   function buildTableHeaderData() {
     return Object.keys(list[0]);
   }
 
+  function handleNextTablePage() {
+    setTablePageNo((prev) => prev + 1);
+  }
+
+  function handlePrevTablePage() {
+    if (tablePageNo === 1) return;
+    setTablePageNo((prev) => prev - 1);
+  }
+
   return (
     <div className="p-5">
-      {list.length > 0 ? (
-        <TableComponent headerData={buildTableHeaderData()} tableData={[]} />
-      ) : (
+      {loading ? (
         <Spinner
           animation="border"
           variant="primary"
           className="spinner-center"
+        />
+      ) : (
+        <TableComponent
+          headerData={buildTableHeaderData()}
+          tableData={list}
+          incrementPageNo={handleNextTablePage}
+          decrementPageNo={handlePrevTablePage}
+          decrementButtonDisable={tablePageNo === 1}
+          pageNo={tablePageNo}
         />
       )}
     </div>

@@ -1,11 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-//pages
 import Home from "./pages/home/home";
 import Details from "./pages/details/details";
-import FourZeroFour from "./pages/fourzerofour/fourZeroFour";
-//components
+import FourZeroFour from "./pages/fourZeroFour/fourZeroFour";
 import Header from "./components/header/header";
 
 function App() {

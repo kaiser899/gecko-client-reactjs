@@ -5,7 +5,7 @@ import "./header.css";
 const Header = () => {
   return (
     <Navbar bg="dark" variant="dark" className="d-flex justify-content-between">
-      <Navbar.Brand href="#home" className="d-flex">
+      <Navbar.Brand className="d-flex">
         <img
           alt=""
           src="/logo512.png"
@@ -13,19 +13,14 @@ const Header = () => {
           height="30"
           className="d-inline-block align-top"
         />
-        <div className="ml-2">Gecko Coin Client</div>
+        <div className="ml-2">Gecko Client</div>
       </Navbar.Brand>
-
-      <div className="header-small-info">
-        Built with{" "}
-        <a
-          href="https://www.coingecko.com/api/documentations/v3"
-          target="_blank"
-          rel="norefferer noreferrer"
-        >
-          CoinGecko API
-        </a>
-      </div>
+      <a
+        href="https://www.coingecko.com/api/documentations/v3#/"
+        className="header-small-info"
+      >
+        Build with Coin Gecko API
+      </a>
     </Navbar>
   );
 };
