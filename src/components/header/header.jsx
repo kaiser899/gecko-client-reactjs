@@ -19,7 +19,7 @@ const Header = () => {
         href="https://www.coingecko.com/api/documentations/v3#/"
         className="header-small-info"
       >
-        Build with Coin Gecko API
+        Built with Coin Gecko API
       </a>
     </Navbar>
   );
