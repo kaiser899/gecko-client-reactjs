@@ -12,9 +12,8 @@ const TableComponent = ({
   pageNo = 0,
   decrementButtonDisable = false,
   showPagination = true,
+  containerClassName = "",
 }) => {
-  const [row, setRow] = useState([]);
-
   const getTableRow = () => {
     return tableData.map((rowObj, index) => {
       return (
@@ -41,7 +40,7 @@ const TableComponent = ({
   };
 
   return (
-    <div>
+    <div className={containerClassName}>
       <Table striped bordered hover responsive>
         <thead>
           <tr>

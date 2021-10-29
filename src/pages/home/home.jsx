@@ -5,9 +5,12 @@ import Spinner from "react-bootstrap/Spinner";
 import "./home.css";
 
 const Home = () => {
+  let initPage = sessionStorage.getItem("page");
+  if (initPage !== null) initPage = Number(initPage);
+
   const [list, setList] = useState([]);
   const [error, setError] = useState("");
-  const [tablePageNo, setTablePageNo] = useState(1);
+  const [tablePageNo, setTablePageNo] = useState(initPage || 1);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,6 +43,7 @@ const Home = () => {
     }
 
     fetchList();
+    sessionStorage.setItem("page", tablePageNo);
   }, [tablePageNo]);
 
   function buildTableHeaderData() {
