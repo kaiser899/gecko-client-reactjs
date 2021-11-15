@@ -35,6 +35,7 @@ const cases = [
   [22, "A"],
   [23, "A"],
 ];
+
 cases.forEach((caseElem) => {
   Date.now = jest.fn(() =>
     new Date(Date.UTC(2021, 11, 4, caseElem[0], 55)).valueOf()
